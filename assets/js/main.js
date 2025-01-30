@@ -137,8 +137,18 @@ document.addEventListener("DOMContentLoaded", function () {
   var resetButton = document.getElementById("resetButton");
 
   resetButton.addEventListener("click", function () {
-    gameIframe.contentWindow.postMessage("resetGame", "*"); // Send reset message FIRST
+    resetGame();
   });
+
+  function resetGame() {
+    if (gameWindow) {
+      gameIframe.contentWindow.postMessage("reset", "*"); // Send a reset message
+    } else {
+      console.warn(
+        "gameWindow is not available yet. Iframe might not be loaded."
+      );
+    }
+  }
 
   runButton.addEventListener("click", function () {
     executeCode(); // Call the function to execute the code

@@ -67,23 +67,15 @@ end.fill = "red";
 let player;
 
 function createPlayer(startX, startY) {
-  // Remove the old player if it exists
-  if (player) {
-    console.log(player);
-      player.remove(); // Use Two.js's remove method
-      console.log(player);
-  }
-
   player = two.makeRectangle(
-      startX * cellSize + cellSize / 2,
-      startY * cellSize + cellSize / 2,
-      cellSize / 2,
-      cellSize / 2
-  );
+    startX * cellSize + cellSize / 2,
+    startY * cellSize + cellSize / 2,
+    cellSize / 2,
+    cellSize / 2
+  ); // Smaller square
   player.fill = "yellow";
   player.stroke = "black";
   player.linewidth = 1;
-  two.update(); // Important: Update Two.js after creating the player
 }
 
 // Place the player at the start point after the maze is drawn
@@ -151,18 +143,35 @@ window.moveDown = function () {
   }
 };
 
-window.resetGame = function () {
-  console.log("Here In reset");
-  createPlayer(startX, startY); // Create a *new* player at the start
-  // Any other game state resets (score, etc.) would go here
-};
+
+function resetGameState() {
+  // Remove the old player
+  two.remove(player);
+
+  // Create a new player at the initial position
+  createPlayer(startX, startY);
+
+  // Update the Two.js scene
+  two.update();
+
+   //Any other game state variables that need to be reset should be done here.
+   //For example, if you have a 'score' variable, reset it to its initial value.
+}
+
 
 // Listen for messages from the parent window
 window.addEventListener("message", function (event) {
-  var code = event.data;
-  try {
-    eval(code);
-  } catch (error) {
-    console.error("Error executing code:", error);
+  var message = event.data;
+
+  if (message === 'reset') {
+    resetGameState();
+  } else {
+    var code = message; //Treat other messages as code
+    try {
+      eval(code);
+    } catch (error) {
+      console.error("Error executing code:", error);
+    }
   }
+
 });
