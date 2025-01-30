@@ -1,0 +1,8 @@
+/* style.css */
+#blocklyArea {
+    border-right: 1px solid #ccc; /* Separator between Blockly and game */
+}
+
+#gameIframe {
+    border: none; /* Remove iframe border */
+}

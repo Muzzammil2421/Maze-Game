@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Coding Game for Kids</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script src="https://unpkg.com/blockly/blockly_compressed.js"></script>
+    <script src="https://unpkg.com/blockly/blocks_compressed.js"></script>
+    <script src="https://unpkg.com/blockly/javascript_compressed.js"></script>
+    <script src="https://unpkg.com/blockly/msg/en.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/two.js@latest/build/two.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="mt-2 col-md-4" id="blocklyArea">
+                <div id="blocklyDiv" style="height: 480px; width: 100%"></div>
+                <button id="runButton" class="btn btn-primary">Run</button> 
+                <button id="resetButton" class="btn btn-primary">Reset</button>
+            </div>
+                
+            <div class="mt-2 col-md-8">
+                <iframe id="gameIframe" src="game/index.html" width="100%" style="height: 480px; width: 100%;" ></iframe>
+            </div>
+        </div>
+    </div>
+
+    <xml id="toolbox" style="display: none">
+        <category name="Movement" color="#29AB29">
+            <block type="move_right"></block>
+            <block type="move_left"></block>
+            <block type="move_up"></block>
+            <block type="move_down"></block>
+        </category>
+        <category name="Actions" color="#A65BFF">
+            <block type="repeat_until_obstacle"></block>
+        </category>
+    </xml>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
