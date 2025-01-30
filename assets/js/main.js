@@ -1,6 +1,24 @@
 document.addEventListener("DOMContentLoaded", function () {
+  alert(`
+        Welcome to the Maze Solver!
+
+        Use Blockly to program the yellow player to reach the red end point.
+
+        Drag blocks from the toolbox on the left and connect them to create a sequence of instructions.
+
+        Available blocks:
+        - Move Right: Moves the player one cell to the right.
+        - Move Left: Moves the player one cell to the left.
+        - Move Up: Moves the player one cell up.
+        - Move Down: Moves the player one cell down.
+        - Repeat Until Obstacle: Repeats the blocks inside until the player encounters a wall in the given direction.
+
+        Click the "Run" button to execute your program.
+
+        Good luck!
+    `);
+
   var blocklyDiv = document.getElementById("blocklyDiv");
-  var blocklyArea = document.getElementById("blocklyArea");
   var gameIframe = document.getElementById("gameIframe");
   var gameWindow =
     gameIframe.contentWindow || gameIframe.contentDocument.defaultView;
@@ -66,10 +84,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             `;
       } else {
-        return "// No valid movement block found inside the loop.\n"; // Or handle it differently
+        return "// No valid movement block found inside the loop.\n"; 
       }
     } else {
-      return "// No code inside the loop.\n"; // Or handle it differently
+      return "// No code inside the loop.\n";
     }
   };
 
@@ -174,10 +192,6 @@ document.addEventListener("DOMContentLoaded", function () {
       y += element.offsetTop;
       element = element.offsetParent;
     } while (element);
-    blocklyArea.style.left = x + "px";
-    blocklyArea.style.top = y + "px";
-    blocklyArea.style.width = blocklyDiv.offsetWidth + "px";
-    blocklyArea.style.height = blocklyDiv.offsetHeight + "px";
     Blockly.svgResize(workspace);
   }
 

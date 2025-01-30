@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Coding Game for Kids</title>
+    <title>Maze Game</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
     <script src="https://unpkg.com/blockly/blockly_compressed.js"></script>
@@ -12,16 +12,37 @@
     <script src="https://cdn.jsdelivr.net/npm/two.js@latest/build/two.min.js"></script>
 </head>
 <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand mx-auto" href="#">🧩 Maze Game</a>
+        </div>
+    </nav>
+
     <div class="container-fluid">
-        <div class="row">
-            <div class="mt-2 col-md-4" id="blocklyArea">
-                <div id="blocklyDiv" style="height: 480px; width: 100%"></div>
-                <button id="runButton" class="btn btn-primary">Run</button> 
-                <button id="resetButton" class="btn btn-primary">Reset</button>
+        <div class="row full-height">
+            <!-- Blockly Section -->
+            <div class="col-md-4 mt-1 d-flex flex-column">
+                <div class="card equal-height">
+                    <div class="card-header text-center"><h2>Blockly Interface</h2></div>
+                    <div class="card-body p-2">
+                        <div id="blocklyDiv"></div>
+                    </div>
+                </div>
+                <div class="mt-2 text-center">
+                    <button id="runButton" class="btn btn-success mr-2">Run</button> 
+                    <button id="resetButton" class="btn btn-danger">Reset</button>
+                </div>
             </div>
-                
-            <div class="mt-2 col-md-8">
-                <iframe id="gameIframe" src="game/index.html" width="100%" style="height: 480px; width: 100%;" ></iframe>
+
+            <!-- Game Iframe Section -->
+            <div class="col-md-8 mt-1 d-flex flex-column">
+                <div class="card equal-height">
+                    <div class="card-header text-center"><h2>Maze</h2></div>
+                    <div class="card-body p-0">
+                        <iframe id="gameIframe" src="game/index.html"></iframe>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

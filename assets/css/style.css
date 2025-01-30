@@ -1,8 +1,24 @@
-/* style.css */
-#blocklyArea {
-    border-right: 1px solid #ccc; /* Separator between Blockly and game */
+
+ .full-height {
+    height: 90vh;
+    display: flex;
+    align-items: stretch;
+}
+
+.equal-height {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 #gameIframe {
-    border: none; /* Remove iframe border */
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
+#blocklyDiv {
+    height: 65vh;
+    width: 100%;
+    overflow: hidden;
 }

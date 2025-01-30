@@ -1,21 +1,23 @@
 // Maze dimensions and cell size
-const width = 11;
-const height = 11;
+const width = 21;
+const height = 13;
 const cellSize = 40;
 
-// Maze data (1 for wall, 0 for path) -  REPRODUCIBLE MAZE
+// Maze data (1 for wall, 0 for path)
 const mazeData = [
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
-  [1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1],
-  [1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+  [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1],
+  [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+  [1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1],
+  [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+  [1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+  [1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
 // Initialize Two.js
@@ -45,10 +47,10 @@ for (let y = 0; y < height; y++) {
   }
 }
 
-// Draw start and end points (you can customize these)
-const startX = 1; // Example start (adjust as needed)
+// Draw start and end points
+const startX = 1;
 const startY = 1;
-const endX = width - 2; // Example end (adjust as needed)
+const endX = width - 2;
 const endY = height - 2;
 
 const start = two.makeCircle(
@@ -72,14 +74,33 @@ function createPlayer(startX, startY) {
     startY * cellSize + cellSize / 2,
     cellSize / 2,
     cellSize / 2
-  ); // Smaller square
+  );
   player.fill = "yellow";
   player.stroke = "black";
   player.linewidth = 1;
 }
 
+
+// Function to check win/loss conditions
+function checkGameStatus() {
+  const playerX = Math.floor(player.translation.x / cellSize); // Get player's cell coordinates
+  const playerY = Math.floor(player.translation.y / cellSize);
+
+  if (playerX === endX && playerY === endY) {
+    displayMessage("You won!");
+  } else {
+    displayMessage("You lost! Try again.");
+  }
+}
+
+// Function to display a message
+function displayMessage(message) {
+  alert(message);
+}
+
+
 // Place the player at the start point after the maze is drawn
-createPlayer(startX, startY); // Use the startX and startY you defined earlier.
+createPlayer(startX, startY);
 
 two.update();
 
@@ -144,18 +165,12 @@ window.moveDown = function () {
 };
 
 
+// This function resets game state to original so that user can 
 function resetGameState() {
-  // Remove the old player
   two.remove(player);
-
-  // Create a new player at the initial position
   createPlayer(startX, startY);
-
-  // Update the Two.js scene
   two.update();
-
-   //Any other game state variables that need to be reset should be done here.
-   //For example, if you have a 'score' variable, reset it to its initial value.
+   
 }
 
 
@@ -166,11 +181,12 @@ window.addEventListener("message", function (event) {
   if (message === 'reset') {
     resetGameState();
   } else {
-    var code = message; //Treat other messages as code
+    var code = message;
     try {
       eval(code);
     } catch (error) {
-      console.error("Error executing code:", error);
+      console.error("Error executing code:", error, "Caused by this code:", code);
+      displayMessage("An error occurred. Please check your code."); // Inform user of error
     }
   }
 
